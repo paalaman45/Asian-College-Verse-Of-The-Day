@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC Verse Of The Day</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+    <div class="body">
+        <div class="header">
+            <img src="./img/AC_Logo_Vert.png" height="100px" alt="">
+            <h1>VERSE OF THE <span>DAY</span></h1>
+        </div>
+        <div class="content">
+            <h2 id="verse"></h2>
+            <p id="content"></p>
+        </div>
+        <div class="footer">
+            <h3>IPTECH II - Kissel James Paalaman</h3>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {  
+            var url = 'https://www.biblegateway.com/votd/get/?format=atom'; //Data in XML format  
+            $.ajax({  
+                type: 'GET',  
+                url: "https://api.rss2json.com/v1/api.json?rss_url=" + url, //For converting default format to JSON format  
+                dataType: 'jsonp', //for making cross domain call  
+                success: function(data) {  
+                    $("#verse").text(data.items[0].title);
+                    $("#content").text(data.items[0].description);
+                }  
+            });  
+        }); 
+    </script>
+</body>
+</html>
